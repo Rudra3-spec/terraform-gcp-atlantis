@@ -1,0 +1,11 @@
+version: 3
+
+projects:
+  - name: gcp-infrastructure
+    dir: variables
+    workspace: default
+    autoplan:
+      enabled: true
+      when_modified:
+        - "*.tf"
+        - "../modules/**/*.tf"
