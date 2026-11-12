@@ -1,8 +1,11 @@
+
 resource "google_compute_instance" "my_vm" {
   project      = var.project_id
   name         = "atlantis-demo-vm"
   machine_type = var.machine_type
   zone         = var.zone
+
+  tags = ["allow-iap-ssh"]
 
   boot_disk {
     initialize_params {
@@ -15,4 +18,10 @@ resource "google_compute_instance" "my_vm" {
 
     access_config {}
   }
+
+  service_account {
+    email  = "atlantis-sa@social-monitor-487714.iam.gserviceaccount.com"
+    scopes = ["cloud-platform"]
+  }
 }
+
