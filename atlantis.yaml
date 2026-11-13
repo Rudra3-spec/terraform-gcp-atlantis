@@ -8,4 +8,4 @@ projects:
       enabled: true
       when_modified:
         - "*.tf"
-        - "../modules/**/*.tf"
+        - "../resources/**/*.tf"
