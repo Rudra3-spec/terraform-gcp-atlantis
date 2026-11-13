@@ -27,3 +27,14 @@ module "storage" {
   region      = var.region
   bucket_name = "social-monitor-487714-terraform-state"
 }
+module "new_vm" {
+  source = "../resources/compute"
+
+  project_id            = var.project_id
+  zone                  = var.zone
+  machine_type          = var.machine_type
+  subnetwork            = module.vpc.subnet_self_link
+  vm_name               = "my-new-vm"
+  vm_name_2             = "my-new-vm-2"
+  service_account_email = "your-service-account"
+}
