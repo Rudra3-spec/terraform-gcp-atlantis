@@ -1,15 +1,15 @@
 module "vpc" {
-  source = "git::https://github.com/Rudra3-spec/terraform-gcp-modules.git//vpc?ref=main"
+  source = "../resources/vpc"
 
-  project_id     = var.project_id
-  region         = var.region
-  vpc_name       = "atlantis-vpc"
-  subnet_name    = "atlantis-subnet"
-  ip_cidr_range  = "10.0.1.0/24"
+  project_id    = var.project_id
+  region        = var.region
+  vpc_name      = "atlantis-vpc"
+  subnet_name   = "atlantis-subnet"
+  ip_cidr_range = "10.0.1.0/24"
 }
 
 module "compute" {
-  source = "git::https://github.com/Rudra3-spec/terraform-gcp-modules.git//compute?ref=main"
+  source = "../resources/compute"
 
   project_id            = var.project_id
   zone                  = var.zone
@@ -21,7 +21,7 @@ module "compute" {
 }
 
 module "storage" {
-  source = "git::https://github.com/Rudra3-spec/terraform-gcp-modules.git//storage?ref=main"
+  source = "../resources/storage"
 
   project_id  = var.project_id
   region      = var.region
