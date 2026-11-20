@@ -1,11 +1,84 @@
+
 version: 3
 
+workflows:
+  project1_resources:
+    plan:
+      steps:
+        - init:
+            extra_args:
+              - "-backend-config=../../backend/backend.tfbackend"
+              - "-backend-config=../../backend/project1.tfbackend"
+        - plan:
+            extra_args:
+              - "-var-file=../../variables/project1.tfvars"
+    apply:
+      steps:
+        - apply
+
+  project1_iam:
+    plan:
+      steps:
+        - init:
+            extra_args:
+              - "-backend-config=../../backend/backend.tfbackend"
+              - "-backend-config=../../backend/project1.tfbackend"
+        - plan:
+            extra_args:
+              - "-var-file=../../variables/project1.tfvars"
+    apply:
+      steps:
+        - apply
+
 projects:
-  - name: gcp-infrastructure
-    dir: variables
-    workspace: default
+  # PROJECT 1 - COMPUTE
+  - name: project1-compute
+    dir: resources/compute
+    workflow: project1_resources
+    workspace: compute
+    apply_requirements: [mergeable, approved]
     autoplan:
       enabled: true
       when_modified:
         - "*.tf"
-        - "../resources/**/*.tf"
+        - "../../variables/project1.tfvars"
+        - "../../backend/*.tfbackend"
+
+  # PROJECT 1 - STORAGE
+  - name: project1-storage
+    dir: resources/storage
+    workflow: project1_resources
+    workspace: storage
+    apply_requirements: [mergeable, approved]
+    autoplan:
+      enabled: true
+      when_modified:
+        - "*.tf"
+        - "../../variables/project1.tfvars"
+        - "../../backend/*.tfbackend"
+
+  # PROJECT 1 - VPC
+  - name: project1-vpc
+    dir: resources/vpc
+    workflow: project1_resources
+    workspace: vpc
+    apply_requirements: [mergeable, approved]
+    autoplan:
+      enabled: true
+      when_modified:
+        - "*.tf"
+        - "../../variables/project1.tfvars"
+        - "../../backend/*.tfbackend"
+
+  # PROJECT 1 - IAM
+  - name: project1-iam
+    dir: resources/iam
+    workflow: project1_iam
+    workspace: iam
+    apply_requirements: [mergeable, approved]
+    autoplan:
+      enabled: true
+      when_modified:
+        - "*.tf"
+        - "../../variables/project1.tfvars"
+        - "../../backend/*.tfbackend"
