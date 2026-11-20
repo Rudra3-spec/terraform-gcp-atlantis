@@ -1,7 +1,7 @@
-output "bucket_name" {
-  value = module.storage.bucket_name
+output "bucket_names" {
+  value = module.storage.bucket_names
 }
 
-output "bucket_url" {
-  value = module.storage.bucket_url
+output "bucket_urls" {
+  value = module.storage.bucket_urls
 }

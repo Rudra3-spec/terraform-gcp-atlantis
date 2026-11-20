@@ -1,7 +1,7 @@
-output "vm_name" {
-  value = module.compute.vm_name
+output "vm_names" {
+  value = module.compute.vm_names
 }
 
-output "vm_public_ip" {
-  value = module.compute.vm_public_ip
+output "vm_public_ips" {
+  value = module.compute.vm_public_ips
 }

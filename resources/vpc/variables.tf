@@ -1,24 +1,31 @@
 variable "project_id" {
-  description = "GCP Project ID"
-  type        = string
+  type = string
 }
 
 variable "region" {
-  description = "GCP Region"
-  type        = string
+  type = string
 }
 
 variable "vpc_name" {
-  description = "VPC name"
-  type        = string
+  type = string
 }
 
 variable "subnet_name" {
-  description = "Subnet name"
-  type        = string
+  type = string
 }
 
 variable "ip_cidr_range" {
-  description = "Subnet CIDR range"
-  type        = string
+  type = string
+}
+
+variable "firewall_rules" {
+  type = list(object({
+    name          = string
+    direction     = string
+    source_ranges = list(string)
+    protocol      = string
+    ports         = list(string)
+    target_tags   = list(string)
+  }))
+  default = []
 }
