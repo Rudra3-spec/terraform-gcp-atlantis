@@ -42,7 +42,12 @@ buckets = [
     location = "asia-south1"
   }
 ]
-
+service_accounts = [
+  {
+    account_id   = "my-vm-sa"
+    display_name = "My VM Service Account"
+  }
+]
 # Dynamic firewall rule list
 firewall_rules = [
   {
