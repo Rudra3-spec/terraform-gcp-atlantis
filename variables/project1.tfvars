@@ -27,6 +27,12 @@ vms = [
     name         = "my-new-vm-2"
     machine_type = "e2-medium"
     zone         = "asia-south1-a"
+  },
+  {
+    name                  = "dev-test-vm"
+    machine_type          = "e2-medium"
+    zone                  = "asia-south1-a"
+    service_account_email = "dev-test-vm-sa@social-monitor-487714.iam.gserviceaccount.com"
   }
 ]
 
@@ -46,6 +52,10 @@ service_accounts = [
   {
     account_id   = "my-vm-sa"
     display_name = "My VM Service Account"
+  },
+  {
+   account_id = "dev-test-vm-sa"
+   display_name="Dev Test VM Service Account"
   }
 ]
 # Dynamic firewall rule list
